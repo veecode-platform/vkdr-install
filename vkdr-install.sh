@@ -13,7 +13,8 @@ trap cleanup SIGINT
 download_file() {
     if command -v wget > /dev/null; then
         echo "Downloading $FILENAME to $TEMP_FILE using wget..."
-        wget -q --show-progress -O "$TEMP_FILE" "$DOWNLOAD_URL"
+        #wget -q --show-progress -O "$TEMP_FILE" "$DOWNLOAD_URL"
+        wget -q -O "$TEMP_FILE" "$DOWNLOAD_URL"
     else
         echo "wget not available, using curl..."
         echo "Downloading $FILENAME to $TEMP_FILE using curl..."
@@ -66,9 +67,14 @@ download_file
 
 # Check if /usr/local/bin exists and move the file
 if [ -d "/usr/local/bin" ]; then
-    echo "Moving $TEMP_FILE to /usr/local/bin/vkdr..."
-    sudo mv $TEMP_FILE /usr/local/bin/vkdr
-    sudo chmod +x /usr/local/bin/vkdr
+    echo "Moving $TEMP_FILE to /usr/local/bin/vkdr (may require sudo)..."
+    if [ "$(id -u)" -eq 0 ]; then
+      mv $TEMP_FILE /usr/local/bin/vkdr
+      chmod +x /usr/local/bin/vkdr
+    else
+      sudo mv $TEMP_FILE /usr/local/bin/vkdr
+      sudo chmod +x /usr/local/bin/vkdr
+    fi
     echo "Download and installation completed, VKDR is now available at '/usr/local/bin/vkdr'"
 else
     echo "/usr/local/bin does not exist. Please check your installation."
