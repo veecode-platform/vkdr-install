@@ -6,8 +6,6 @@ static_sites:
     branch: main
     deploy_on_push: true
     repo: veecode-platform/vkdr-install
-  index_document: "vkdr-install.sh"
-  routes:
-  - path: /
-  source_dir: /
+  index_document: vkdr-install.sh
   name: vkdr-install
+  source_dir: /
