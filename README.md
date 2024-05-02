@@ -1,2 +1,2 @@
-# vkpr-install
-VKPR CLI install script
+# vkdr-install
+VKDR CLI install script
