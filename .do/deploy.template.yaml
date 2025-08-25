@@ -1,9 +1,0 @@
-spec:
-  name: vkdr-install
-  static_sites:
-  - environment_slug: html
-    git:
-      branch: main
-      repo_clone_url: https://github.com/veecode-platform/vkdr-install.git
-    name: vkdr-install
-    index_document: index.sh
