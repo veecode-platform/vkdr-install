@@ -22,11 +22,19 @@ download_file() {
     fi
 }
 
+check_curl() {
+    if ! command -v curl > /dev/null; then
+        echo "curl is not installed. Please install curl to continue."
+        exit 1
+    fi
+}
+
 # GitHub user and repository name
 USER="veecode-platform"
 REPO="vkdr"
 
 # Get the latest release data from GitHub API
+check_curl
 LATEST_RELEASE=$(curl -s "https://api.github.com/repos/$USER/$REPO/releases/latest")
 
 # Extract the tag name (version) from the release data
@@ -39,7 +47,7 @@ ARCH=$(uname -m)
 # Convert architecture to the required format
 if [[ $ARCH == "x86_64" ]]; then
     ARCH="amd64"
-elif [[ $ARCH == "arm64" ]]; then
+elif [[ $ARCH == "arm64" || $ARCH == "aarch64" ]]; then
     ARCH="arm64"
 else
     echo "Unsupported architecture: $ARCH"
