@@ -53,6 +53,7 @@ else
     echo "Unsupported architecture: $ARCH"
     exit 1
 fi
+echo "Detected architecture: $ARCH"
 
 # Build the filename based on OS and architecture
 if [[ $OS == "Linux" ]]; then
